@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta CEP</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+</head>
+
+<style>
+    * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    body {
+        padding-top: 50px;
+    }
+
+    input {
+        width: 200px;
+    }
+
+    button {
+        width: 200px;
+    }
+
+    .form-group input {
+        margin-bottom: 10px;
+    }
+</style>
+
+<body>
+
+     <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Consulta CEP</h1>
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" role="form" method="post">
+                            <div class="form-group">
+                                <label for="cep" class="col-sm-2 control-label">CEP:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="cep" name="cep"
+                                        oninput="mascaraDeCep(this.value)">
+                                </div>
+                                <label for="logradouro" class="col-sm-2 control-label">Logradouro:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="logradouro" name="logradouro">
+                                </div>
+                                <label for="bairro" class="col-sm-2 control-label">Bairro:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="bairro" name="bairro">
+                                </div>
+                                <label for="cidade" class="col-sm-2 control-label">Cidade:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="cidade" name="cidade">
+                                </div>
+                                <label for="uf" class="col-sm-2 control-label">UF:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="uf" name="uf">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-success btn-submit button">Consultar</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <script type="text/javascript">
+
+
+                            function mascaraDeCep(cep) {
+                                if (cep.length == 8) {
+                                    cep = cep.replace(/\D/g, '');
+                                    cep = cep.substring(0, 5) + '-' + cep.substring(5, 8);
+                                    document.getElementById('cep').value = cep;
+                                }
+                                if (document.getElementById('cep').value.length >= 10) {
+                                    document.getElementById('cep').value = document.getElementById('cep').value.substring(0, 9);
+                                }
+                            }
+
+                            document.querySelector(".btn-submit").onclick = function (e) {
+                                e.preventDefault();
+                                consultaCepFetch(document.getElementById('cep').value);
+                            }
+
+                            //function to fetch CEP with AXIOS Lib. Use viacep.com
+                            function consultaCepFetch(cep) {
+                                axios.get('http://viacep.com.br/ws/' + cep + '/json/')
+                                    .then(function (response) {
+                                        document.getElementById('logradouro').value = response.data.logradouro;
+                                        document.getElementById('bairro').value = response.data.bairro;
+                                        document.getElementById('cidade').value = response.data.localidade;
+                                        document.getElementById('uf').value = response.data.uf;
+                                    })
+                                    .catch(function (error) {
+                                        console.log(error);
+                                    });
+                            }
+
+                        </script>
+</body>
+
+</html>
