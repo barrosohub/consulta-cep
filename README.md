@@ -8,4 +8,4 @@ Foi usado:
 
 CSS e Javascript estão propositalmente "inline".
 
-O objetivo era apenas construir um formulário de consulta de CEP em menos de 2 minutos.
+O objetivo era apenas construir um formulário de consulta de CEP em menos de 2 minutos usando o Github Copilot.
