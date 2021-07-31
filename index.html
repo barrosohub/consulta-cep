@@ -98,7 +98,7 @@
 
                             //function to fetch CEP with AXIOS Lib. Use viacep.com
                             function consultaCepFetch(cep) {
-                                axios.get('http://viacep.com.br/ws/' + cep + '/json/')
+                                axios.get('https://viacep.com.br/ws/' + cep + '/json/')
                                     .then(function (response) {
                                         document.getElementById('logradouro').value = response.data.logradouro;
                                         document.getElementById('bairro').value = response.data.bairro;
