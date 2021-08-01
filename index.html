@@ -8,7 +8,6 @@
     <title>Consulta CEP</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 </head>
 
 <style>
@@ -78,8 +77,8 @@
                         </form>
 
                         <script type="text/javascript">
-
-
+                           
+      
                             function mascaraDeCep(cep) {
                                 if (cep.length == 8) {
                                     cep = cep.replace(/\D/g, '');
@@ -95,20 +94,26 @@
                                 e.preventDefault();
                                 consultaCepFetch(document.getElementById('cep').value);
                             }
+                           
 
-                            //function to fetch CEP with AXIOS Lib. Use viacep.com
+                            //refactoring consultaCepFetch. This function should be use javascript fetch instead of axios
                             function consultaCepFetch(cep) {
-                                axios.get('https://viacep.com.br/ws/' + cep + '/json/')
+                                fetch('https://viacep.com.br/ws/' + cep + '/json/')
                                     .then(function (response) {
-                                        document.getElementById('logradouro').value = response.data.logradouro;
-                                        document.getElementById('bairro').value = response.data.bairro;
-                                        document.getElementById('cidade').value = response.data.localidade;
-                                        document.getElementById('uf').value = response.data.uf;
+                                        return response.json();
+                                    })
+                                    .then(function (response) {
+                                        document.getElementById('logradouro').value = response.logradouro;
+                                        document.getElementById('bairro').value = response.bairro;
+                                        document.getElementById('cidade').value = response.localidade;
+                                        document.getElementById('uf').value = response.uf;
                                     })
                                     .catch(function (error) {
                                         console.log(error);
                                     });
                             }
+
+
 
                         </script>
 
