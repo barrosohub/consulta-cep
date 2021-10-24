@@ -107,10 +107,21 @@
                                         document.getElementById('bairro').value = response.bairro;
                                         document.getElementById('cidade').value = response.localidade;
                                         document.getElementById('uf').value = response.uf;
+                                        
+                                        if(response.erro == true){
+
+                                        document.getElementById('logradouro').value = "";
+                                        document.getElementById('bairro').value = "";
+                                        document.getElementById('cidade').value = "";
+                                        document.getElementById('uf').value = "";
+
+                                        alert('CEP inválido ou não encontrado. Revise e tente outra vez.');
+
+                                        console.log("Cep inválido ou não encontrado"); 
+
+                                        }
+
                                     })
-                                    .catch(function (error) {
-                                        console.log(error);
-                                    });
                             }
 
                         </script>
