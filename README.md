@@ -7,7 +7,7 @@ Foi usado:
 
 CSS e Javascript estão propositalmente "inline".
 
-O objetivo era apenas construir um formulário de consulta de CEP em menos de 2 minutos com auxílio do Github Copilot.
+O objetivo era apenas construir um formulário de consulta de CEP em 2 minutos usando o Github Copilot.
 
 Confira o projeto rodando online:
 https://consulta-cep.pages.dev/
