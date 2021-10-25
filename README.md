@@ -3,7 +3,6 @@
 Foi usado:
 
 - Bootstrap (https://getbootstrap.com/)
-- Axios (https://github.com/axios/axios)
 - Web Service ViaCEP (http://www.viacep.com.br/)
 
 CSS e Javascript estão propositalmente "inline".
